@@ -5,7 +5,7 @@ import android.support.test.espresso.IdlingResource
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : Contains a static reference to @see IdlingResource, only available in the 'mock' build type.
+ *desc   : 包含对@see IdlingResource的静态引用，仅在'mock'构建类型中可用。
  *version: 1.0
  */
 object EspressoIdlingResource{
