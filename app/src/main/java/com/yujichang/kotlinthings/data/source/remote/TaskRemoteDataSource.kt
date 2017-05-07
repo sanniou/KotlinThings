@@ -9,7 +9,8 @@ import java.util.*
 /**
  *author : jichang
  *time   : 2017/05/07
- *desc   : 实现增加延迟模拟网络的数据源
+ *desc   : complete
+ * 实现增加延迟模拟网络的数据源
  *version: 1.0
  */
 object TaskRemoteDataSource : TasksDataSource {
