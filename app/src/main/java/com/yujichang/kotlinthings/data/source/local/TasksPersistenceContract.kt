@@ -26,6 +26,7 @@ object TasksPersistenceContract {
     /* Inner class that defines the table contents */
     abstract class TaskEntry : BaseColumns {
         companion object {
+            val _ID = BaseColumns._ID //不这样写无法使用？
             val TABLE_NAME = "task"
             val COLUMN_NAME_ENTRY_ID = "entryid"
             val COLUMN_NAME_TITLE = "title"
