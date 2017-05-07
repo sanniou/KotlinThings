@@ -10,13 +10,12 @@ import com.yujichang.kotlinthings.data.source.TasksDataSource
  *具体实现数据源为db。
  *version: 1.0
  */
-class TasksLocalDataSource : TasksDataSource {
-    companion object {
-        fun getInstance(context: Context): TasksLocalDataSource
-                = Inner.single
+object TasksLocalDataSource : TasksDataSource {
+val mDBHelper = TasksDbHelper()
+    fun getInstance(context: Context): TasksLocalDataSource {
+
+        return this
     }
 
-    private object Inner {
-        val single = TasksLocalDataSource()
-    }
+
 }
