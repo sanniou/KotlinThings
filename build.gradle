@@ -20,7 +20,7 @@ buildscript {
         espressoVersion = '2.2.2'
 
         //kt version
-        kotlin_version = '1.1.2-2'
+        kotlin_version = '1.1.2-3'
     }
     repositories {
         jcenter()

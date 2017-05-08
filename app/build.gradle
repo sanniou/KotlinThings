@@ -88,6 +88,8 @@ dependencies {
     // Dependencies for Android unit tests
     androidTestCompile "junit:junit:$junitVersion"
     androidTestCompile "org.mockito:mockito-core:$mockitoVersion"
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     // Espresso UI Testing
     androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
@@ -100,9 +102,7 @@ dependencies {
     androidTestCompile "com.android.support:recyclerview-v7:$supportLibraryVersion"
     androidTestCompile "com.android.support:appcompat-v7:$supportLibraryVersion"
     androidTestCompile "com.android.support:design:$supportLibraryVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
 }
 
 repositories {
