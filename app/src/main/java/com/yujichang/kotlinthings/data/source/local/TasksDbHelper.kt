@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 /**
  *author : jichang
  *time   : 2017/05/07
- *desc   : 喵喵？
+ *desc   : 喵喵
  *version: 1.0
  */
 class TasksDbHelper (val c:Context): SQLiteOpenHelper(c,"Tasks.db",null,1) {
