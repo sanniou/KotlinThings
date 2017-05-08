@@ -87,6 +87,7 @@ object TasksLocalDataSource : TasksDataSource {
 
         if (task != null) {
             callback.onTaskLoaded(task)
+
         } else {
             callback.onDataNotAvailable()
         }
