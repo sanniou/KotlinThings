@@ -1,15 +1,16 @@
 package com.yujichang.kotlinthings.data.source.local
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 /**
  *author : jichang
- *time   : 2017/05/05
+ *time   : 2017/05/07
  *desc   : 喵喵
  *version: 1.0
  */
-object TasksDbHelperL: SQLiteOpenHelper() {
+class TasksDbHelper (val c:Context): SQLiteOpenHelper(c,"Tasks.db",null,1) {
     val DATABASE_VERSION = 1
 
     val DATABASE_NAME = "Tasks.db"
@@ -28,12 +29,17 @@ object TasksDbHelperL: SQLiteOpenHelper() {
                     TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
                     TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED + BOOLEAN_TYPE +
                     " )"
-    override fun onCreate(db: SQLiteDatabase?) {
 
+
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(SQL_CREATE_ENTRIES)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        // Not required as at version 1
     }
 
+    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        // Not required as at version 1
+    }
 }

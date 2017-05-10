@@ -14,6 +14,7 @@ import android.provider.BaseColumns
 class TasksPersistenceContract private constructor() {
     /* Inner class that defines the table contents */
     companion object TaskEntry : BaseColumns {
+        val _ID = BaseColumns._ID //不这样写无法使用？
         val TABLE_NAME = "task"
         val COLUMN_NAME_ENTRY_ID = "entryid"
         val COLUMN_NAME_TITLE = "title"
