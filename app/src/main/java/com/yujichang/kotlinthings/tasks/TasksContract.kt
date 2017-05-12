@@ -7,10 +7,11 @@ import com.yujichang.kotlinthings.data.Task
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : 喵喵
+ *desc   : complete
+ * 这指定了View和Presenter之间的契约。
  *version: 1.0
  */
-interface TasksContract{
+interface TasksContract {
     interface View : BaseView<Presenter> {
 
         fun setLoadingIndicator(active: Boolean)
@@ -64,6 +65,6 @@ interface TasksContract{
 
         fun clearCompletedTasks()
 
-        var filtering: TasksFilterType
+        var filtering:TasksFilterType
     }
 }

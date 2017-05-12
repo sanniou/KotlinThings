@@ -5,7 +5,8 @@ import android.support.test.espresso.IdlingResource
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : 包含对@see IdlingResource的静态引用，仅在'mock'构建类型中可用。
+ *desc   :complete
+ * 包含对@see IdlingResource的静态引用，仅在'mock'构建类型中可用。
  *version: 1.0
  */
 object EspressoIdlingResource{

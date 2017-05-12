@@ -6,21 +6,27 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : 喵喵
+ *desc   :complete
+ * 一个简单的计数器实现使用{@link IdlingResource}确定闲置通过
+ * 维持一个内部计数器. 当计数器为 0 - 它被认为是空闲的, 当
+ * 非零，它不空闲. 这与{@link java.util.concurrent.Semaphore}的方式非常相似
+ *行为。
+ * <p>
+ * 这个类可以用来包装操作当在访问UI是进行测试.
  *version: 1.0
  */
 
 /**
- * Creates a SimpleCountingIdlingResource
+ * 创建一个SimpleCountingIdlingResource
  *
- * @param resourceName the resource name this resource should report to Espresso.
+ * @param resourceName 该资源应该向Espresso报告的资源名称。
  */
 class SimpleCountingIdlingResource(val resourceName: String) : IdlingResource {
 
 
     private val counter = AtomicInteger(0)
 
-    // written from main thread, read from any thread.
+    // 从主线程写入，从任何线程读取.
     lateinit @Volatile private var resourceCallback: IdlingResource.ResourceCallback
 
     override fun getName() = resourceName
@@ -32,16 +38,16 @@ class SimpleCountingIdlingResource(val resourceName: String) : IdlingResource {
     }
 
     /**
-     * Increments the count of in-flight transactions to the resource being monitored.
+     * 将正在运行的事务的计数增加到正在监视的资源。
      */
     fun increment() = counter.getAndIncrement()
 
     /**
-     * Decrements the count of in-flight transactions to the resource being monitored.
+     *减少正在监视的资源的数量。
 
-     * If this operation results in the counter falling below 0 - an exception is raised.
+     * 如果此操作导致计数器低于0  - 引发异常。
 
-     * @throws IllegalStateException if the counter is below 0.
+     * @throws IllegalStateException 如果计数器低于0.
      */
     fun decrement() {
         val counterVal = counter.decrementAndGet()

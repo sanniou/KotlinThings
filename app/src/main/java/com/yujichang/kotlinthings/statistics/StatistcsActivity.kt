@@ -9,6 +9,6 @@ class StatistcsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_statistcs)
+        setContentView(R.layout.statistcs_act)
     }
 }

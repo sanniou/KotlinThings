@@ -6,6 +6,6 @@ package com.yujichang.kotlinthings
  *desc   : 喵喵
  *version: 1.0
  */
-interface BaseView<T> {
+interface BaseView<in T> {
     fun setPresenter(presenter: T)
 }

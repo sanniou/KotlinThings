@@ -19,9 +19,9 @@ object TaskRemoteDataSource : TasksDataSource {
         addTask("Finish bridge in Tacoma", "Found awesome girders at half the cost!")
     }
 
-    val SERVICE_LATENCY_IN_MILLIS = 5000L
+    private val SERVICE_LATENCY_IN_MILLIS = 5000L
 
-    val TASKS_SERVICE_DATA = mutableMapOf<String, Task>()
+    private val TASKS_SERVICE_DATA = mutableMapOf<String, Task>()
 
 
     fun addTask(title: String, description: String) {

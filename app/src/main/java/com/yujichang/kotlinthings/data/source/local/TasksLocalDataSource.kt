@@ -14,7 +14,7 @@ import com.yujichang.kotlinthings.data.source.TasksDataSource
  */
 object TasksLocalDataSource : TasksDataSource {
 
-    lateinit var mDbHelper: TasksDbHelper
+    private  lateinit var mDbHelper: TasksDbHelper
 
     fun getInstance(context: Context): TasksLocalDataSource {
         mDbHelper = TasksDbHelper(context)

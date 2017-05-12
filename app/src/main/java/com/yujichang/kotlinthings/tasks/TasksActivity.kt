@@ -12,19 +12,22 @@ import com.yujichang.kotlinthings.Injection
 import com.yujichang.kotlinthings.R
 import com.yujichang.kotlinthings.statistics.StatistcsActivity
 import com.yujichang.kotlinthings.util.EspressoIdlingResource
-import kotlinx.android.synthetic.main.activity_task.*
-import kotlinx.android.synthetic.main.activity_task.drawer_layout as mDrawer
-import kotlinx.android.synthetic.main.activity_task.nav_view as mNavigation
+import kotlinx.android.synthetic.main.task_act.*
+import kotlinx.android.synthetic.main.task_act.drawer_layout as mDrawer
+import kotlinx.android.synthetic.main.task_act.nav_view as mNavigation
 
+/**
+ * complete
+ */
 class TasksActivity : AppCompatActivity() {
 
     private val CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY"
 
-    lateinit var mTasksPresenter: TasksPresenter
+    private lateinit var mTasksPresenter: TasksPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task)
+        setContentView(R.layout.task_act)
 
 
         //ToolBar
@@ -68,12 +71,12 @@ class TasksActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) {
             val currentFiltering = savedInstanceState.getSerializable(CURRENT_FILTERING_KEY) as TasksFilterType
-            mTasksPresenter.setFiltering(currentFiltering)
+            mTasksPresenter.filtering = currentFiltering
         }
     }
 
     public override fun onSaveInstanceState(outState: Bundle) {
-        outState.putSerializable(CURRENT_FILTERING_KEY, mTasksPresenter.getFiltering())
+        outState.putSerializable(CURRENT_FILTERING_KEY, mTasksPresenter.filtering)
 
         super.onSaveInstanceState(outState)
     }
