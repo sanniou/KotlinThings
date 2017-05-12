@@ -1,5 +1,6 @@
 package com.yujichang.kotlinthings.data.source.local
 
+import android.content.ContentValues
 import android.content.Context
 import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.data.source.TasksDataSource
@@ -7,7 +8,7 @@ import com.yujichang.kotlinthings.data.source.TasksDataSource
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   :
+ *desc   :complete
  *具体实现数据源为db。
  *version: 1.0
  */
@@ -93,39 +94,83 @@ object TasksLocalDataSource : TasksDataSource {
     }
 
     override fun saveTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val values = ContentValues()
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_ENTRY_ID, task.id)
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_TITLE, task.title)
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION, task.description)
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED, task.completed)
+
+        mDbHelper.writableDatabase
+                .use {
+                    it.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, values)
+                }
     }
 
     override fun completeTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val values = ContentValues()
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED, true)
+
+        val selection = TasksPersistenceContract.TaskEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?"
+        val selectionArgs = arrayOf(task.id)
+
+        mDbHelper.writableDatabase
+                .use {
+                    it.update(TasksPersistenceContract.TaskEntry.TABLE_NAME, values, selection, selectionArgs)
+                }
     }
 
     override fun completeTask(taskId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // 由于{@link TasksRepository}处理，本地数据源不需要
+        // 使用其缓存的数据从{@code taskId}转换为{@link任务}。
     }
 
     override fun activateTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val values = ContentValues()
+        values.put(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED, false)
+
+        val selection = TasksPersistenceContract.TaskEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?"
+        val selectionArgs = arrayOf(task.id)
+        mDbHelper.writableDatabase
+                .use {
+                    it.update(TasksPersistenceContract.TaskEntry.TABLE_NAME, values, selection, selectionArgs)
+                }
     }
 
     override fun activateTask(taskId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // 由于{@link TasksRepository}处理，本地数据源不需要
+        // 使用其缓存的数据从{@code taskId}转换为{@link任务}。
     }
 
     override fun clearCompletedTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val selection = TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED + " LIKE ?"
+        val selectionArgs = arrayOf("1")
+        mDbHelper.writableDatabase
+                .use {
+                    it.delete(TasksPersistenceContract.TaskEntry.TABLE_NAME, selection, selectionArgs)
+                }
     }
 
     override fun refreshTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // 不需要，因为{@link TasksRepository}处理刷新的逻辑
+        // 来自所有可用数据源的任务。
     }
 
     override fun deleteAllTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mDbHelper.writableDatabase
+                .use {
+                    it.delete(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, null)
+                }
     }
 
     override fun deleteTask(taskId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val selection = TasksPersistenceContract.TaskEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?"
+        val selectionArgs = arrayOf(taskId)
+        mDbHelper.writableDatabase
+                .use {
+                    it.delete(TasksPersistenceContract.TaskEntry.TABLE_NAME, selection, selectionArgs)
+                }
     }
 
 
