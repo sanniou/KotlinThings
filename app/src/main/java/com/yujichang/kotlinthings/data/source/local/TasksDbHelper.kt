@@ -7,13 +7,15 @@ import android.database.sqlite.SQLiteOpenHelper
 /**
  *author : jichang
  *time   : 2017/05/07
- *desc   : 喵喵
+ *desc   : complete
  *version: 1.0
  */
-class TasksDbHelper (val c:Context): SQLiteOpenHelper(c,"Tasks.db",null,1) {
-    val DATABASE_VERSION = 1
 
-    val DATABASE_NAME = "Tasks.db"
+val DATABASE_VERSION = 1
+
+val DATABASE_NAME = "Tasks.db"
+
+class TasksDbHelper(val c: Context) : SQLiteOpenHelper(c, DATABASE_NAME, null, DATABASE_VERSION) {
 
     private val TEXT_TYPE = " TEXT"
 
@@ -43,3 +45,4 @@ class TasksDbHelper (val c:Context): SQLiteOpenHelper(c,"Tasks.db",null,1) {
         // Not required as at version 1
     }
 }
+
