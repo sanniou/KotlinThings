@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 /**
  *author : jichang
  *time   : 2017/05/07
- *desc   : complet
+ *desc   : complete
  *version: 1.0
  */
 
