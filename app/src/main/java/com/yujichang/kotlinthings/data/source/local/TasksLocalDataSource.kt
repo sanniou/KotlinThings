@@ -45,7 +45,7 @@ object TasksLocalDataSource : TasksDataSource {
         }
 
         if (tasks.isEmpty()) {
-            // 如果表是新的或是空的，这将被调用。
+            // 如果表是新的或是空的，这将被调用
             callback.onDataNotAvailable()
         } else {
             callback.onTasksLoaded(tasks)
