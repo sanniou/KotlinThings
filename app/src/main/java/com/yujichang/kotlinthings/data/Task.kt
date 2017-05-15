@@ -8,7 +8,10 @@ import com.google.common.base.Strings
  *desc   : complete
  *version: 1.0
  */
-data class Task(val id: String, val title: String, val description: String, val completed: Boolean = false) {
+data class Task(val id: String ,
+                val title: String,
+                val description: String,
+                val completed: Boolean = false) {
     fun getTitleForList(): String {
         if (!Strings.isNullOrEmpty(title)) {
             return title
@@ -19,5 +22,9 @@ data class Task(val id: String, val title: String, val description: String, val 
 
     fun isActive(): Boolean {
         return !completed
+    }
+
+    fun isEmpty(): Boolean {
+        return Strings.isNullOrEmpty(title) && Strings.isNullOrEmpty(description)
     }
 }

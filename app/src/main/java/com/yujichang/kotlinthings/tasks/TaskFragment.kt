@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.*
 import android.widget.BaseAdapter
 import android.widget.CheckBox
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.tasks_frag.view.*
  *author : jichang
  *time   : 2017/05/03
  *desc   :complete
- * 显示{@link任务}的网格。用户可以选择查看所有，活动或已完成的任务。
+ * 显示{@link Task}的网格。用户可以选择查看所有，活动或已完成的任务。
  *version: 1.0
  */
 
@@ -115,7 +114,6 @@ class TaskFragment : Fragment(),
                 .run {
                     menuInflater.inflate(R.menu.filter_tasks, menu)
                     setOnMenuItemClickListener {
-                        Log.e("?????",it.itemId.toString())
                         when (it.itemId) {
                             R.id.active -> mPresenter.filtering = TasksFilterType.ACTIVE_TASKS
                             R.id.completed -> mPresenter.filtering = TasksFilterType.COMPLETED_TASKS
@@ -258,16 +256,12 @@ class TaskFragment : Fragment(),
             return i.toLong()
         }
 
-        override fun getView(i: Int, view: View, viewGroup: ViewGroup): View {
-            var rowView: View? = view
-            if (rowView == null) {
-                val inflater = LayoutInflater.from(viewGroup.context)
-                rowView = inflater.inflate(R.layout.task_item, viewGroup, false)
-            }
+        override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
+
+            val rowView = view?:LayoutInflater.from(viewGroup.context).inflate(R.layout.task_item, viewGroup, false)
 
             val task = getItem(i)
-
-            val titleTV = rowView!!.findViewById(R.id.title) as TextView
+            val titleTV = rowView.findViewById(R.id.title) as TextView
             titleTV.text = task.getTitleForList()
 
             val completeCB = rowView.findViewById(R.id.complete) as CheckBox

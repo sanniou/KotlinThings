@@ -2,6 +2,7 @@ package com.yujichang.kotlinthings.data.source.local
 
 import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.data.source.TasksDataSource
 
@@ -103,7 +104,7 @@ object TasksLocalDataSource : TasksDataSource {
 
         mDbHelper.writableDatabase
                 .use {
-                    it.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, values)
+                    val insert = it.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, values)
                 }
     }
 
