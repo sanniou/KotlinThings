@@ -27,14 +27,14 @@ class SimpleCountingIdlingResource(val resourceName: String) : IdlingResource {
     private val counter = AtomicInteger(0)
 
     // 从主线程写入，从任何线程读取.
-    lateinit @Volatile private var resourceCallback: IdlingResource.ResourceCallback
+     @Volatile private var resourceCallback: IdlingResource.ResourceCallback?=null
 
     override fun getName() = resourceName
 
     override fun isIdleNow() = counter.get() == 0
 
-    override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback?) {
-        this.resourceCallback = resourceCallback
+    override fun registerIdleTransitionCallback(callback: IdlingResource.ResourceCallback) {
+       resourceCallback = callback
     }
 
     /**
@@ -53,7 +53,7 @@ class SimpleCountingIdlingResource(val resourceName: String) : IdlingResource {
         val counterVal = counter.decrementAndGet()
         if (counterVal == 0) {
             // we've gone from non-zero to zero. That means we're idle now! Tell espresso.
-            resourceCallback.onTransitionToIdle()
+            resourceCallback?.onTransitionToIdle()
         }
 
         if (counterVal < 0) {

@@ -11,14 +11,12 @@ import java.util.*
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : 喵喵
+ *desc   : complete
  *version: 1.0
  */
 class TasksPresenter(val mTasksRepository: TasksRepository, val mTasksView: TasksContract.View) : TasksContract.Presenter {
 
     private var mFirstLoad = true
-
-    private var mCurrentFiltering = TasksFilterType.ALL_TASKS
 
     init {
         mTasksView.setPresenter(this)
@@ -77,9 +75,9 @@ class TasksPresenter(val mTasksRepository: TasksRepository, val mTasksView: Task
                     EspressoIdlingResource.decrement() // Set app as idle.
                 }
 
-                // We filter the tasks based on the requestType
+                // 我们基于requestType筛选tasks
                 for (task in tasks) {
-                    when (mCurrentFiltering) {
+                    when (filtering) {
                         TasksFilterType.ALL_TASKS -> tasksToShow.add(task)
                         TasksFilterType.ACTIVE_TASKS -> if (task.isActive()) {
                             tasksToShow.add(task)
@@ -91,34 +89,82 @@ class TasksPresenter(val mTasksRepository: TasksRepository, val mTasksView: Task
                     }
                 }
 
-                //TODO
+                // 该视图可能无法处理UI更新了
+                if (!mTasksView.isActive) {
+                    return
+                }
+                if (showLoadingUI) {
+                    mTasksView.setLoadingIndicator(false)
+                }
+
+                processTasks(tasksToShow)
             }
 
         })
     }
 
+    private fun processTasks(tasks: List<Task>) {
+        if (tasks.isEmpty()) {
+            //显示指示该筛选器类型没有任务的消息。
+            processEmptyTasks()
+        } else {
+            // 显示任务列表
+            mTasksView.showTasks(tasks)
+            // 设置筛选器标签的文本。
+            showFilterLabel()
+        }
+    }
+
+    private fun showFilterLabel() {
+        when (filtering) {
+            TasksFilterType.ACTIVE_TASKS -> mTasksView.showActiveFilterLabel()
+            TasksFilterType.COMPLETED_TASKS -> mTasksView.showCompletedFilterLabel()
+            else -> mTasksView.showAllFilterLabel()
+        }
+    }
+
+    private fun processEmptyTasks() {
+        when (filtering) {
+            TasksFilterType.ACTIVE_TASKS -> mTasksView.showNoActiveTasks()
+            TasksFilterType.COMPLETED_TASKS -> mTasksView.showNoCompletedTasks()
+            else -> mTasksView.showNoTasks()
+        }
+    }
+
+
     override fun addNewTask() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mTasksView.showAddTask()
     }
 
     override fun openTaskDetails(requestedTask: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mTasksView.showTaskDetailsUi(requestedTask.id)
     }
 
     override fun completeTask(completedTask: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mTasksRepository.completeTask(completedTask)
+        mTasksView.showTaskMarkedComplete()
+        loadTasks(false, false)
     }
 
     override fun activateTask(activeTask: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mTasksRepository.activateTask(activeTask)
+        mTasksView.showTaskMarkedActive()
+        loadTasks(false, false)
     }
 
     override fun clearCompletedTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mTasksRepository.clearCompletedTasks()
+        mTasksView.showCompletedTasksCleared()
+        loadTasks(false, false)
     }
 
-    override var filtering: TasksFilterType
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-        set(value) {}
+    /**
+     * 设置当前任务筛选类型。
+     *
+     * 可以是{@link TasksFilterType#ALL_TASKS},
+     * {@link TasksFilterType#COMPLETED_TASKS},
+     * {@link TasksFilterType#ACTIVE_TASKS}
+     */
+    override var filtering = TasksFilterType.ALL_TASKS
 
 }

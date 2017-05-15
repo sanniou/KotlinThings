@@ -29,8 +29,8 @@ object TasksRepository : TasksDataSource {
 
     lateinit var mTasksRemoteDataSource: TasksDataSource
 
-    fun getInstance(tasksLocalDataSource: TasksDataSource,
-                    tasksRemoteDataSource: TasksDataSource): TasksRepository {
+    fun getInstance(tasksRemoteDataSource: TasksDataSource,
+                    tasksLocalDataSource: TasksDataSource): TasksRepository {
         this.mTasksLocalDataSource = tasksLocalDataSource
         this.mTasksRemoteDataSource = tasksRemoteDataSource
         return this

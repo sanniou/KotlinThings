@@ -43,7 +43,7 @@ class TasksActivity : AppCompatActivity() {
         mNavigation.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.list_navigation_menu_item -> {
-                    // Do nothing, we're already on that screen
+                    // 什么都不做，已经在这个界面
                 }
                 R.id.statistics_navigation_menu_item -> {
                     startActivity(Intent(this, StatistcsActivity::class.java))
@@ -67,8 +67,7 @@ class TasksActivity : AppCompatActivity() {
         mTasksPresenter = TasksPresenter(
                 Injection.provideTasksRepository(applicationContext), tasksFragment as TaskFragment)
 
-        // Load previously saved state, if available.
-
+        // 加载先前保存的状态，如果可用。
         if (savedInstanceState != null) {
             val currentFiltering = savedInstanceState.getSerializable(CURRENT_FILTERING_KEY) as TasksFilterType
             mTasksPresenter.filtering = currentFiltering
@@ -84,7 +83,7 @@ class TasksActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                // Open the navigation drawer when the home icon is selected from the toolbar.
+                // 当从工具栏中选择主页图标时打开导航抽屉。
                 mDrawer.openDrawer(GravityCompat.START)
                 return true
             }
