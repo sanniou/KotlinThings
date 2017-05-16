@@ -13,7 +13,7 @@ import java.util.LinkedHashMap
  */
 object FakeTasksRemoteDataSource :TasksDataSource{
 
-    private val TASKS_SERVICE_DATA = LinkedHashMap<String, Task>().withDefault { Task("null", "null", "null", false) }
+    private val TASKS_SERVICE_DATA = LinkedHashMap<String, Task>().withDefault { Task("", "", "", false) }
 
 
 
@@ -35,7 +35,7 @@ object FakeTasksRemoteDataSource :TasksDataSource{
     }
 
     override fun completeTask(task: Task) {
-        val completedTask = Task(task.title, task.description, task.id, true)
+        val completedTask = Task(task.id, task.title, task.description, true)
         TASKS_SERVICE_DATA.put(task.id, completedTask)
     }
 
@@ -44,7 +44,7 @@ object FakeTasksRemoteDataSource :TasksDataSource{
     }
 
     override fun activateTask(task: Task) {
-        val activeTask = Task(task.title, task.description, task.id)
+        val activeTask = Task(task.id, task.title, task.description)
         TASKS_SERVICE_DATA.put(task.id, activeTask)
     }
 

@@ -40,7 +40,7 @@ object TasksLocalDataSource : TasksDataSource {
                     val title = it.getString(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_TITLE))
                     val description = it.getString(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION))
                     val completed = it.getInt(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED)) == 1
-                    val task = Task(title, description, itemId, completed)
+                    val task = Task(itemId, title, description, completed)
                     tasks.add(task)
                 }
             }
@@ -81,7 +81,7 @@ object TasksLocalDataSource : TasksDataSource {
                                             it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION))
                                     val completed = it.getInt(
                                             it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED)) == 1
-                                    task = Task(title, description, itemId, completed)
+                                    task = Task(itemId, title, description, completed)
                                 }
                             }
                 }
@@ -104,7 +104,7 @@ object TasksLocalDataSource : TasksDataSource {
 
         mDbHelper.writableDatabase
                 .use {
-                    val insert = it.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, values)
+                    it.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, null, values)
                 }
     }
 

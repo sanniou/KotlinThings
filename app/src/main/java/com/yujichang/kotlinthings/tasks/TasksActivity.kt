@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import com.amitshekhar.DebugDB
 import com.yujichang.kotlinthings.Injection
 import com.yujichang.kotlinthings.R
 import com.yujichang.kotlinthings.statistics.StatistcsActivity
@@ -26,6 +27,7 @@ class TasksActivity : AppCompatActivity() {
     private lateinit var mTasksPresenter: TasksPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DebugDB.getAddressLog()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_act)
 

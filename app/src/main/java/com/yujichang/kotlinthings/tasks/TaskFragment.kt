@@ -63,6 +63,11 @@ class TaskFragment : Fragment(),
         mPresenter = presenter
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        mPresenter.result(requestCode, resultCode)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.tasks_frag, container, false)
@@ -165,8 +170,9 @@ class TaskFragment : Fragment(),
             )
 
 
-    override fun showSuccessfullySavedMessage() =
-            showMessage(getString(R.string.successfully_saved_task_message))
+    override fun showSuccessfullySavedMessage() {
+        showMessage(getString(R.string.successfully_saved_task_message))
+    }
 
 
     private fun showNoTasksViews(mainText: String, iconRes: Int, showAddView: Boolean) {
@@ -258,7 +264,7 @@ class TaskFragment : Fragment(),
 
         override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
 
-            val rowView = view?:LayoutInflater.from(viewGroup.context).inflate(R.layout.task_item, viewGroup, false)
+            val rowView = view ?: LayoutInflater.from(viewGroup.context).inflate(R.layout.task_item, viewGroup, false)
 
             val task = getItem(i)
             val titleTV = rowView.findViewById(R.id.title) as TextView

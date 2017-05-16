@@ -1,5 +1,6 @@
 package com.yujichang.kotlinthings.data.source
 
+import android.util.Log
 import com.yujichang.kotlinthings.data.Task
 
 /**
@@ -23,7 +24,7 @@ object TasksRepository : TasksDataSource {
     /**
      * 该变量具有包本地可见性，因此可以从测试中访问。
      */
-    var mCachedTasks = mutableMapOf<String, Task>().withDefault { Task("null", "null", "null", false) }
+    var mCachedTasks = mutableMapOf<String, Task>().withDefault { Task("", "", "", false) }
 
     lateinit var mTasksLocalDataSource: TasksDataSource
 
@@ -60,11 +61,10 @@ object TasksRepository : TasksDataSource {
                     getTasksFromRemoteDataSource(callback)
                 }
             })
-*/
-        } else {
-            //如果缓存是脏的，我们需要从网络中获取新的数据。
-            getTasksFromRemoteDataSource(callback)
+            */
         }
+        //如果缓存是脏的，我们需要从网络中获取新的数据。
+        getTasksFromRemoteDataSource(callback)
     }
 
     /**

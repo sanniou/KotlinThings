@@ -8,7 +8,7 @@ import com.google.common.base.Strings
  *desc   : complete
  *version: 1.0
  */
-data class Task(val id: String ,
+data class Task(val id: String,
                 val title: String,
                 val description: String,
                 val completed: Boolean = false) {
@@ -25,6 +25,10 @@ data class Task(val id: String ,
     }
 
     fun isEmpty(): Boolean {
-        return Strings.isNullOrEmpty(title) && Strings.isNullOrEmpty(description)
+        return title.isEmpty() && description.isEmpty()
     }
+
+    fun  available()=id.isEmpty()
+
+
 }
