@@ -1,6 +1,5 @@
 package com.yujichang.kotlinthings.data.source
 
-import android.util.Log
 import com.yujichang.kotlinthings.data.Task
 
 /**
@@ -77,7 +76,7 @@ object TasksRepository : TasksDataSource {
     override fun getTask(taskId: String, callback: TasksDataSource.GetTaskCallback) {
         val cachedTask = getTaskWithId(taskId)
         // 立即回应缓存（如果有）
-        if (cachedTask.id == "null") {
+        if (!cachedTask.unavailable()) {
             callback.onTaskLoaded(cachedTask)
             return
         }

@@ -28,7 +28,7 @@ data class Task(val id: String,
         return title.isEmpty() && description.isEmpty()
     }
 
-    fun  available()=id.isEmpty()
+    fun unavailable()=id.isEmpty()
 
 
 }

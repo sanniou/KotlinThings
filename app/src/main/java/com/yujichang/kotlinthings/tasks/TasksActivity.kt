@@ -8,10 +8,9 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
-import com.amitshekhar.DebugDB
 import com.yujichang.kotlinthings.Injection
 import com.yujichang.kotlinthings.R
-import com.yujichang.kotlinthings.statistics.StatistcsActivity
+import com.yujichang.kotlinthings.statistics.StatisticsActivity
 import com.yujichang.kotlinthings.util.EspressoIdlingResource
 import kotlinx.android.synthetic.main.task_act.*
 import kotlinx.android.synthetic.main.task_act.drawer_layout as mDrawer
@@ -27,7 +26,6 @@ class TasksActivity : AppCompatActivity() {
     private lateinit var mTasksPresenter: TasksPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DebugDB.getAddressLog()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_act)
 
@@ -48,7 +46,7 @@ class TasksActivity : AppCompatActivity() {
                     // 什么都不做，已经在这个界面
                 }
                 R.id.statistics_navigation_menu_item -> {
-                    startActivity(Intent(this, StatistcsActivity::class.java))
+                    startActivity(Intent(this, StatisticsActivity::class.java))
                 }
                 else -> {
                 }

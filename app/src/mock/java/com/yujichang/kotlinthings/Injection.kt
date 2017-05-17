@@ -8,7 +8,9 @@ import com.yujichang.kotlinthings.data.source.local.TasksLocalDataSource
 /**
  *author : jichang
  *time   : 2017/05/05
- *desc   : 喵喵
+ *desc   : complete
+ *在编译时启用了{@link TasksDataSource}的模拟实现。 这对于测试是有用的，
+ * 因为它允许我们使用类的假实例来隔离依赖关系并且密封地运行测试。
  *version: 1.0
  */
 object Injection {

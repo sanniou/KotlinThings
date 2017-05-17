@@ -40,7 +40,7 @@ class TaskDetailPresenter(val mTaskId: String,
                     return
                 }
                 mTaskDetailView.setLoadingIndicator(false)
-                if (task.available()) {
+                if (task.unavailable()) {
                     mTaskDetailView.showMissingTask()
                 } else {
                     showTask(task)

@@ -9,6 +9,7 @@ import java.util.LinkedHashMap
  *author : jichang
  *time   : 2017/05/05
  *desc   : complete
+ * 实现具有静态访问数据的远程数据源，便于测试。
  *version: 1.0
  */
 object FakeTasksRemoteDataSource :TasksDataSource{
@@ -64,7 +65,7 @@ object FakeTasksRemoteDataSource :TasksDataSource{
 
     override fun refreshTasks() {
         // Not required because the {@link TasksRepository} handles the logic of refreshing the
-        // tasks from all the available data sources.
+        // tasks from all the unavailable data sources.
     }
 
     override fun deleteTask(taskId: String) {
