@@ -14,13 +14,15 @@ import android.provider.BaseColumns
 class TasksPersistenceContract private constructor() {
 
     /* 定义表内容的内部类 */
-    object TaskEntry : BaseColumns {
-        val _COUNT = BaseColumns._COUNT
-        val _ID = BaseColumns._ID //kotlin的interface 属性要么是抽象的，要么提供访问器的实现，这里无法在外部引用_ID,只好使用本地val
-        val TABLE_NAME = "task"
-        val COLUMN_NAME_ENTRY_ID = "entryid"
-        val COLUMN_NAME_TITLE = "title"
-        val COLUMN_NAME_DESCRIPTION = "description"
-        val COLUMN_NAME_COMPLETED = "completed"
+    abstract class TaskEntry : BaseColumns {
+        companion object {
+            val _COUNT = BaseColumns._COUNT
+            val _ID = BaseColumns._ID //kotlin的interface 属性要么是抽象的，要么提供访问器的实现，这里无法在外部引用_ID,只好使用本地val
+            val TABLE_NAME = "task"
+            val COLUMN_NAME_ENTRY_ID = "entryid"
+            val COLUMN_NAME_TITLE = "title"
+            val COLUMN_NAME_DESCRIPTION = "description"
+            val COLUMN_NAME_COMPLETED = "completed"
+        }
     }
 }
