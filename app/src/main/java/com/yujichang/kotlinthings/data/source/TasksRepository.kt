@@ -13,7 +13,7 @@ import com.yujichang.kotlinthings.data.Task
  *存在或是空的
  *version: 1.0
  */
-object TasksRepository : TasksDataSource {
+open class TasksRepository private constructor() : TasksDataSource {
 
     /**
      *将缓存标记为无效，以便在下次请求数据时强制进行更新。这个变量
@@ -29,11 +29,14 @@ object TasksRepository : TasksDataSource {
 
     lateinit var mTasksRemoteDataSource: TasksDataSource
 
-    fun getInstance(tasksRemoteDataSource: TasksDataSource,
-                    tasksLocalDataSource: TasksDataSource): TasksRepository {
-        this.mTasksLocalDataSource = tasksLocalDataSource
-        this.mTasksRemoteDataSource = tasksRemoteDataSource
-        return this
+    companion object {
+        fun getInstance(tasksRemoteDataSource: TasksDataSource,
+                        tasksLocalDataSource: TasksDataSource): TasksRepository {
+            return TasksRepository().apply {
+                mTasksLocalDataSource = tasksLocalDataSource
+                mTasksRemoteDataSource = tasksRemoteDataSource
+            }
+        }
     }
 
 

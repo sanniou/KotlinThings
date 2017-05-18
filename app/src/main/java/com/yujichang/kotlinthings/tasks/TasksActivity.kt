@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import com.yujichang.kotlinthings.Injection
 import com.yujichang.kotlinthings.R
+import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.statistics.StatisticsActivity
 import com.yujichang.kotlinthings.util.EspressoIdlingResource
 import kotlinx.android.synthetic.main.task_act.*
@@ -28,7 +29,6 @@ class TasksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_act)
-
 
         //ToolBar
         setSupportActionBar(toolbar)
