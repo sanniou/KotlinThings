@@ -1,6 +1,7 @@
 package com.yujichang.kotlinthings.data
 
 import com.google.common.base.Strings
+import java.util.*
 
 /**
  *author : jichang
@@ -8,9 +9,9 @@ import com.google.common.base.Strings
  *desc   : complete
  *version: 1.0
  */
-data class Task(val id: String,
-                val title: String,
+data class Task(val title: String,
                 val description: String,
+                val id: String = UUID.randomUUID().toString(),
                 val completed: Boolean = false) {
     fun getTitleForList(): String {
         if (!Strings.isNullOrEmpty(title)) {
@@ -28,7 +29,7 @@ data class Task(val id: String,
         return title.isEmpty() && description.isEmpty()
     }
 
-    fun unavailable()=id.isEmpty()
+    fun unavailable() = id.isEmpty()
 
 
 }

@@ -3,7 +3,7 @@ package com.yujichang.kotlinthings.data
 import android.support.annotation.VisibleForTesting
 import com.google.common.collect.Lists
 import com.yujichang.kotlinthings.data.source.TasksDataSource
-import java.util.LinkedHashMap
+import java.util.*
 
 /**
  *author : jichang
@@ -12,10 +12,9 @@ import java.util.LinkedHashMap
  * 实现具有静态访问数据的远程数据源，便于测试。
  *version: 1.0
  */
-object FakeTasksRemoteDataSource :TasksDataSource{
+object FakeTasksRemoteDataSource : TasksDataSource {
 
     private val TASKS_SERVICE_DATA = LinkedHashMap<String, Task>().withDefault { Task("", "", "", false) }
-
 
 
     fun getInstance(): FakeTasksRemoteDataSource {
@@ -36,7 +35,7 @@ object FakeTasksRemoteDataSource :TasksDataSource{
     }
 
     override fun completeTask(task: Task) {
-        val completedTask = Task(task.id, task.title, task.description, true)
+        val completedTask = Task(task.title, task.description, task.id, true)
         TASKS_SERVICE_DATA.put(task.id, completedTask)
     }
 
@@ -45,7 +44,7 @@ object FakeTasksRemoteDataSource :TasksDataSource{
     }
 
     override fun activateTask(task: Task) {
-        val activeTask = Task(task.id, task.title, task.description)
+        val activeTask = Task(task.title, task.description, task.id)
         TASKS_SERVICE_DATA.put(task.id, activeTask)
     }
 

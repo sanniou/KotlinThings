@@ -42,10 +42,10 @@ class StatisticsActivity : AppCompatActivity() {
                 .findFragmentById(R.id.contentFrame) as StatisticsFragment?
         if (statisticsFragment == null) {
             statisticsFragment = StatisticsFragment()
-            supportFragmentManager.beginTransaction().run {
-                add(R.id.contentFrame,   statisticsFragment)
-                commit()
-            }
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.contentFrame, statisticsFragment)
+                    .commit()
+
         }
 
         StatisticsPresenter(

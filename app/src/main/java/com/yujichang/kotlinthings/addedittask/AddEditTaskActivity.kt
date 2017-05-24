@@ -51,10 +51,10 @@ class AddEditTaskActivity : AppCompatActivity() {
                 }
             }
 
-            with(supportFragmentManager.beginTransaction()) {
-                add(R.id.contentFrame, addEditTaskFragment)
-                commit()
-            }
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.contentFrame, addEditTaskFragment)
+                    .commit()
+
         }
         var shouldLoadDataFromRepo = true
         // 如果这是配置更改，则阻止presenter从存储库加载数据。

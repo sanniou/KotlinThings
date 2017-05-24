@@ -2,7 +2,6 @@ package com.yujichang.kotlinthings.data.source.local
 
 import android.content.ContentValues
 import android.content.Context
-import android.util.Log
 import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.data.source.TasksDataSource
 
@@ -15,7 +14,7 @@ import com.yujichang.kotlinthings.data.source.TasksDataSource
  */
 object TasksLocalDataSource : TasksDataSource {
 
-    private  lateinit var mDbHelper: TasksDbHelper
+    private lateinit var mDbHelper: TasksDbHelper
 
     fun getInstance(context: Context): TasksLocalDataSource {
         mDbHelper = TasksDbHelper(context)
@@ -40,7 +39,7 @@ object TasksLocalDataSource : TasksDataSource {
                     val title = it.getString(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_TITLE))
                     val description = it.getString(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION))
                     val completed = it.getInt(it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED)) == 1
-                    val task = Task(itemId, title, description, completed)
+                    val task = Task(title, description, itemId, completed)
                     tasks.add(task)
                 }
             }
@@ -81,7 +80,7 @@ object TasksLocalDataSource : TasksDataSource {
                                             it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_DESCRIPTION))
                                     val completed = it.getInt(
                                             it.getColumnIndexOrThrow(TasksPersistenceContract.TaskEntry.COLUMN_NAME_COMPLETED)) == 1
-                                    task = Task(itemId, title, description, completed)
+                                    task = Task(title, description, itemId, completed)
                                 }
                             }
                 }

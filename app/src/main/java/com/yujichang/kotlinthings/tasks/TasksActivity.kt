@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.view.View
 import com.yujichang.kotlinthings.Injection
 import com.yujichang.kotlinthings.R
-import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.statistics.StatisticsActivity
 import com.yujichang.kotlinthings.util.EspressoIdlingResource
 import kotlinx.android.synthetic.main.task_act.*
@@ -59,10 +58,9 @@ class TasksActivity : AppCompatActivity() {
             tasksFragment = TaskFragment()
         }
         supportFragmentManager.beginTransaction()
-                .run {
-                    add(R.id.contentFrame, tasksFragment)
-                    commit()
-                }
+                .add(R.id.contentFrame, tasksFragment)
+                .commit()
+
         // Create the presenter
         mTasksPresenter = TasksPresenter(
                 Injection.provideTasksRepository(applicationContext), tasksFragment as TaskFragment)

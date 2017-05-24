@@ -31,10 +31,10 @@ class TaskDetailActivity : AppCompatActivity() {
 
         if (taskDetailFragment == null) {
             taskDetailFragment = TaskDetailFragment.newInstance(taskId)
-            with(supportFragmentManager.beginTransaction()) {
-                add(R.id.contentFrame, taskDetailFragment)
-                commit()
-            }
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.contentFrame, taskDetailFragment)
+                    .commit()
+
         }
 
         // Create the presenter

@@ -2,7 +2,6 @@ package com.yujichang.kotlinthings.addedittask
 
 import com.yujichang.kotlinthings.data.Task
 import com.yujichang.kotlinthings.data.source.TasksDataSource
-import java.util.*
 
 /**
  *author : jichang
@@ -66,7 +65,7 @@ class AddEditTaskPresenter(val mTaskId: String?, val mTasksRepository: TasksData
     }
 
     private fun createTask(title: String, description: String) {
-        val newTask = Task(UUID.randomUUID().toString(), title, description)
+        val newTask = Task(title, description)
         if (newTask.isEmpty()) {
             mAddTaskView.showEmptyTaskError()
         } else {
@@ -79,7 +78,7 @@ class AddEditTaskPresenter(val mTaskId: String?, val mTasksRepository: TasksData
         if (isNewTask()) {
             throw RuntimeException("updateTask() was called but task is new.")
         }
-        mTasksRepository.saveTask(Task(mTaskId!!, title, description))//TODO 不够智能的smart case ，先用 !! 来是使用
+        mTasksRepository.saveTask(Task(title, description, mTaskId!!))//TODO 不够智能的smart case ，先用 !! 来是使用
         mAddTaskView.showTasksList() // After an edit, go back to the list.
     }
 }

@@ -25,7 +25,7 @@ object TaskRemoteDataSource : TasksDataSource {
 
 
     fun addTask(title: String, description: String) {
-        val newTask = Task(UUID.randomUUID().toString(),title, description)
+        val newTask = Task(title, description)
         TASKS_SERVICE_DATA.put(newTask.id, newTask)
     }
 
@@ -57,7 +57,7 @@ object TaskRemoteDataSource : TasksDataSource {
 
     override fun completeTask(task: Task) {
         TASKS_SERVICE_DATA.put(task.id,
-                Task(task.id, task.title, task.description, true))
+                Task(task.title, task.id, task.description, true))
     }
 
     override fun completeTask(taskId: String) {
@@ -66,7 +66,7 @@ object TaskRemoteDataSource : TasksDataSource {
     }
 
     override fun activateTask(task: Task) {
-        val activeTask = Task(task.id, task.title, task.description)
+        val activeTask = Task(task.title, task.description, task.id)
         TASKS_SERVICE_DATA.put(task.id, activeTask)
     }
 

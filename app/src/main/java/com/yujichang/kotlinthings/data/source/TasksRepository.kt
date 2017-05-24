@@ -30,9 +30,10 @@ open class TasksRepository private constructor() : TasksDataSource {
     lateinit var mTasksRemoteDataSource: TasksDataSource
 
     companion object {
+        val tasksRepository = lazy { TasksRepository() }
         fun getInstance(tasksRemoteDataSource: TasksDataSource,
                         tasksLocalDataSource: TasksDataSource): TasksRepository {
-            return TasksRepository().apply {
+            return tasksRepository.value.apply {
                 mTasksLocalDataSource = tasksLocalDataSource
                 mTasksRemoteDataSource = tasksRemoteDataSource
             }
@@ -121,7 +122,7 @@ open class TasksRepository private constructor() : TasksDataSource {
         mTasksRemoteDataSource.completeTask(task)
         mTasksLocalDataSource.completeTask(task)
 
-        val completedTask = Task(task.id, task.title, task.description, true)
+        val completedTask = Task(task.title, task.description, task.id, true)
 
         //在内存缓存更新中保持应用UI更新
         mCachedTasks.put(task.id, completedTask)
@@ -135,7 +136,7 @@ open class TasksRepository private constructor() : TasksDataSource {
         mTasksRemoteDataSource.activateTask(task)
         mTasksLocalDataSource.activateTask(task)
 
-        val activeTask = Task(task.id, task.title, task.description)
+        val activeTask = Task(task.title, task.description, task.id)
 
         // 在内存缓存更新中保持应用UI更新
         mCachedTasks.put(task.id, activeTask)

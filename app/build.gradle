@@ -32,13 +32,16 @@ android {
         }
     }
 
+    // Specifies a flavor dimension.
+    flavorDimensions "what"
     // If you need to add more flavors, consider using flavor dimensions.
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
+            dimension "what"
         }
         prod {
-
+            dimension "what"
         }
     }
 
